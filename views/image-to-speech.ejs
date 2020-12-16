@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Fastify - In-memory free text search</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template -->
+  <link href="css/landing-page.css" rel="stylesheet">
+  <link href="vendor/codemirror/codemirror.css" rel="stylesheet">
+  <style>
+    .CodeMirror { text-align: left!important; }
+    #code-wrapper { display: none; }
+    .dropdown-menu { height: 250px; overflow-y:auto; }
+  </style>
+</head>
+
+<body>
+  <section class="testimonials text-center bg-light">
+    <div class="container">
+      <h1>Text to Speech | TTS</h1>
+      <div class="playgroud">
+        <div class="alert alert-danger d-none instructions" role="alert"></div>
+        <div class="languages">
+          <div class="language btn-group">
+            <button class="btn btn-primary dropdown-toggle selected-lang" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Choose Languages
+            </button>
+            <div class="dropdown-menu voices"></div>
+          </div>
+        </div>
+        <div class="box-content mt-3">
+          <div class="card">
+            <div class="card-header">
+              <div class="alert alert-success mb-0 p-0" role="alert">
+                <p class="text-line mb-0">Text | File | Image Content</p>
+              </div>
+            </div>
+            <div class="card-body">
+              <textarea id="code-wrapper"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="actions">
+          <div class="btn-group mt-3" role="group" aria-label="Basic example">
+            <!-- <button type="button" class="btn btn-secondary reverse">
+              Reverse &nbsp;&nbsp;<i class="fas fa-backward" aria-hidden="true"></i>
+            </button> -->
+            <button type="button" class="btn btn-secondary play">
+              Play &nbsp;&nbsp;<i class="fas fa-play" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn btn-secondary pause d-none">
+              Pause &nbsp;&nbsp;<i class="fas fa-pause" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn btn-secondary reset">
+              Reset &nbsp;&nbsp;<i class="fas fa-history" aria-hidden="true"></i>
+            </button>
+            <!-- <button type="button" class="btn btn-secondary forward">
+              Forward &nbsp;&nbsp;<i class="fas fa-forward" aria-hidden="true"></i>
+            </button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="vendor/codemirror/codemirror.js"></script>
+  <script src="vendor/text-to-speech.js"></script>
+  <script>
+    $(document).ready(function() {
+
+      // $('.play').on('click', async function(){
+      //   var msg = new SpeechSynthesisUtterance();
+      //   var voices = await new Promise((resolve) => {
+      //       let synth = window.speechSynthesis;
+      //       let id;
+      //       id = setInterval(() => {
+      //           if (synth.getVoices().length !== 0) {
+      //               resolve(synth.getVoices());
+      //               clearInterval(id);
+      //           }
+      //       }, 10);
+      //   });
+      //   msg.voice = voices[1]; // Note: some voices don't support altering params
+      //   msg.voiceURI = 'native';
+      //   msg.volume = 1; // 0 to 1
+      //   msg.rate = 0.8; // 0.1 to 10
+      //   msg.pitch = 2; //0 to 2
+      //   msg.text = $.trim($('.text-content').text());
+      //   msg.lang = 'en-US';
+      //   msg.onend = function(e) {
+      //     console.log('Finished in ' + event.elapsedTime + ' seconds.');
+      //   };
+      //   msg.onerror = function(err) {
+      //     console.log(err);
+      //   };
+      //   window.setTimeout(function() {
+      //     window.speechSynthesis.speak(msg)
+      //   }, 200);
+      //   console.log(msg);
+      // })
+    });
+  </script>
+</body>
+
+</html>
