@@ -19,10 +19,9 @@ node_modules
 npm-debug.log
 
 data
-data-init
+csv-data/*
+!csv-data/README.md
 dist
-server/storage
-server/lib/wsdl/*.wsdl
 .yarn-cache.tgz
 .history
 .vscode

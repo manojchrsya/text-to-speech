@@ -28,10 +28,10 @@
   </style>
 </head>
 
-<body>
-  <section class="testimonials text-center bg-light">
+<body class="bg-light">
+  <section class="text-center pt-4">
     <div class="container">
-      <h1>Text to Speech | TTS</h1>
+      <h3>Text to Speech</h3>
       <div class="playgroud">
         <div class="alert alert-danger d-none instructions" role="alert"></div>
         <div class="languages">
@@ -44,11 +44,11 @@
         </div>
         <div class="box-content mt-3">
           <div class="card">
-            <div class="card-header">
+            <!-- <div class="card-header">
               <div class="alert alert-success mb-0 p-0" role="alert">
                 <p class="text-line mb-0">Text | File | Image Content</p>
               </div>
-            </div>
+            </div> -->
             <div class="card-body">
               <textarea id="code-wrapper"></textarea>
             </div>
@@ -81,41 +81,6 @@
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="vendor/codemirror/codemirror.js"></script>
   <script src="vendor/text-to-speech.js"></script>
-  <script>
-    $(document).ready(function() {
-
-      // $('.play').on('click', async function(){
-      //   var msg = new SpeechSynthesisUtterance();
-      //   var voices = await new Promise((resolve) => {
-      //       let synth = window.speechSynthesis;
-      //       let id;
-      //       id = setInterval(() => {
-      //           if (synth.getVoices().length !== 0) {
-      //               resolve(synth.getVoices());
-      //               clearInterval(id);
-      //           }
-      //       }, 10);
-      //   });
-      //   msg.voice = voices[1]; // Note: some voices don't support altering params
-      //   msg.voiceURI = 'native';
-      //   msg.volume = 1; // 0 to 1
-      //   msg.rate = 0.8; // 0.1 to 10
-      //   msg.pitch = 2; //0 to 2
-      //   msg.text = $.trim($('.text-content').text());
-      //   msg.lang = 'en-US';
-      //   msg.onend = function(e) {
-      //     console.log('Finished in ' + event.elapsedTime + ' seconds.');
-      //   };
-      //   msg.onerror = function(err) {
-      //     console.log(err);
-      //   };
-      //   window.setTimeout(function() {
-      //     window.speechSynthesis.speak(msg)
-      //   }, 200);
-      //   console.log(msg);
-      // })
-    });
-  </script>
 </body>
 
 </html>

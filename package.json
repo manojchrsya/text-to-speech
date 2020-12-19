@@ -15,11 +15,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.7.2",
+    "cheerio": "^1.0.0-rc.3",
     "ejs": "^3.1.5",
     "fastify": "^3.0.0",
     "fastify-autoload": "^3.0.2",
     "fastify-cli": "^2.0.2",
     "fastify-formbody": "^5.0.0",
+    "fastify-mongoose-driver": "^3.2.0",
     "fastify-plugin": "^2.0.0",
     "fastify-static": "^3.3.0",
     "point-of-view": "^4.6.0"

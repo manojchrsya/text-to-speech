@@ -3,9 +3,11 @@
 const path = require('path')
 const AutoLoad = require('fastify-autoload')
 
+
 module.exports = async function (fastify, opts) {
   // Place here your custom code!
-
+  // Read the .env file.
+  require('dotenv').config();
   // 1. set default template enging to render pages
   // 2. server static file from server
   fastify

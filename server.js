@@ -1,8 +1,5 @@
 'use strict'
 
-// Read the .env file.
-require('dotenv').config()
-
 // Require the framework
 const Fastify = require('fastify')
 
