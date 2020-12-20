@@ -11,3 +11,11 @@ $ npm install -d
 $ npm run dev or npm run start
 ```
 ------
+
+Read and Listen text using Browser's `Speech Synthesis` feature.
+
+### Demo
+
+To checkout demo please visit below url
+
+https://speech-textfy.herokuapp.com/
