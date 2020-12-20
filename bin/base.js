@@ -7,7 +7,7 @@ require('dotenv').config();
 class Base {
   constructor () {
     this.app = new Fastify({ logger: true, pluginTimeout: 10000 });
-    this.app.register(require('../plugins/mongo-connector.js'));
+    this.app.register(require('../plugins/00-mongo-connector.js'));
   }
 
   getFileContent(filePath) {

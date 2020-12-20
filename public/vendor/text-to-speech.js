@@ -6,7 +6,7 @@ const tts = {
   isSupported: false,
   voices: [],
   currentLine: 0,
-  defaultLang: 'en-IN',
+  defaultLang: ['en-IN', 'en_IN'],
   config: {
     voice: null,
     voiceURI: 'native',
@@ -48,7 +48,7 @@ const tts = {
       lineWrapping: true,
       mode: {name: "javascript", globalVars: true},
     });
-    if ($('#story-content').val() !== '') {
+    if ($('#story-content').val() && $('#story-content').val().trim().length > 0) {
       this.editor.setValue($('#story-content').val());
     } else {
       this.editor.setValue("Welcome to Text to Speech, please write your content and press play button!");
@@ -66,7 +66,7 @@ const tts = {
     this.voices = await this.getVoiceList();
     let voiceHtml = '';
     this.voices.forEach((voice) => {
-      if (voice.lang === this.defaultLang) {
+      if (this.defaultLang.indexOf(voice.lang) !== -1) {
         $('.selected-lang').text(`${voice.name} (${voice.lang})`);
         this.config.voice = voice;
         this.config.lang = voice.lang;
@@ -150,7 +150,6 @@ const tts = {
     this.play();
   },
   reset: function () {
-    this.pause();
     window.setTimeout(() => {
       window.speechSynthesis.cancel();
       this.currentLine = 0;
@@ -168,7 +167,6 @@ $(document).ready(function(e) {
     if ($(this).attr('value')) {
       const voiceURI = $(this).attr('value');
       const voice = tts.voices.find(voice =>  voice.voiceURI === voiceURI);
-      console.log(voice);
       tts.config.voice = voice;
       tts.config.lang = voice.lang;
       tts.config.voiceURI = voice.voiceURI;

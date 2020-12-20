@@ -15,8 +15,9 @@ class StoryMaster extends Base {
     const stories = JSON.parse(data);
     // itrate and save in db
     await Promise.mapSeries(stories, async (story) => {
-      story.featured = false;
-      await this.app.mongoose.Story.create(story);
+      if (story.title) {
+        await this.app.mongoose.Story.create(story);
+      }
       return true;
     });
     console.log('uploading data completed')

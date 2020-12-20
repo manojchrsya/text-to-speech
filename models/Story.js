@@ -14,5 +14,13 @@ module.exports = {
       type: Boolean,
       required: false,
     },
+    category: {
+      type: Array,
+      required: false,
+    },
+    lang: {
+      type: Array,
+      required: false,
+    }
   },
 };
