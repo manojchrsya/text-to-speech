@@ -19,8 +19,8 @@ const tts = {
     this.isSupported = "speechSynthesis" in window;
     if (!this.isSupported) return false;
     this._showInstructions();
-    await this._setVoiceLanguage();
     this._showEditor();
+    await this._setVoiceLanguage();
     this._speechSynthesis = new SpeechSynthesisUtterance();
     this._speechSynthesis.onend = this._onEnd;
     this._speechSynthesis.onstart = this._onStart;
@@ -48,8 +48,17 @@ const tts = {
       lineWrapping: true,
       mode: {name: "javascript", globalVars: true},
     });
-    if ($('#story-content').val() && $('#story-content').val().trim().length > 0) {
-      this.editor.setValue($('#story-content').val());
+    if ($('#story-content').val()) {
+      try {
+        const story = JSON.parse($('#story-content').val());
+        this.editor.setValue(story.content.trim());
+        // update default lang based on story
+        if (story.lang && story.lang.length > 0) {
+          this.defaultLang = story.lang;
+        }
+      } catch (error) {
+        console.error(error);
+      }
     } else {
       this.editor.setValue("Welcome to Text to Speech, please write your content and press play button!");
     }
@@ -65,6 +74,7 @@ const tts = {
   _setVoiceLanguage: async function () {
     this.voices = await this.getVoiceList();
     let voiceHtml = '';
+    console.log('---' + this.defaultLang);
     this.voices.forEach((voice) => {
       if (this.defaultLang.indexOf(voice.lang) !== -1) {
         $('.selected-lang').text(`${voice.name} (${voice.lang})`);
@@ -160,6 +170,10 @@ const tts = {
 };
 
 $(document).ready(function(e) {
+  const currentPage = parseInt($("#currentPage").val() || 0);
+  if (currentPage > 1) {
+    $('#searchContent').modal({ show: true });
+  }
   tts.init();
   // update config based on voice selection
   $('.voices').on('click', '.dropdown-item', function(e) {
