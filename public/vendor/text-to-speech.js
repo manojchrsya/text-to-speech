@@ -48,16 +48,17 @@ const tts = {
       lineWrapping: true,
       mode: {name: "javascript", globalVars: true},
     });
-    if ($('#story-content').val()) {
-      try {
-        const story = JSON.parse($('#story-content').val());
-        this.editor.setValue(story.content.trim());
-        // update default lang based on story
-        if (story.lang && story.lang.length > 0) {
-          this.defaultLang = story.lang;
-        }
-      } catch (error) {
-        console.error(error);
+    let story = {};
+    try {
+      story = JSON.parse($('#story-content').val());
+    } catch (error) {
+      console.error(error);
+    }
+    if (story && story.content) {
+      this.editor.setValue(story.content && story.content.trim());
+      // update default lang based on story
+      if (story.lang && story.lang.length > 0) {
+        this.defaultLang = story.lang;
       }
     } else {
       this.editor.setValue("Welcome to Text to Speech, please write your content and press play button!");
@@ -74,7 +75,6 @@ const tts = {
   _setVoiceLanguage: async function () {
     this.voices = await this.getVoiceList();
     let voiceHtml = '';
-    console.log('---' + this.defaultLang);
     this.voices.forEach((voice) => {
       if (this.defaultLang.indexOf(voice.lang) !== -1) {
         $('.selected-lang').text(`${voice.name} (${voice.lang})`);
