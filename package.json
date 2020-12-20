@@ -28,6 +28,7 @@
     "point-of-view": "^4.6.0"
   },
   "devDependencies": {
+    "eslint": "^7.16.0",
     "tap": "^14.0.0"
   }
 }

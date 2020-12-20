@@ -9,6 +9,10 @@ module.exports = {
     content: {
       type: String,
       required: true,
-    }
+    },
+    featured: {
+      type: Boolean,
+      required: false,
+    },
   },
 };

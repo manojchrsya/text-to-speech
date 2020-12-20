@@ -6,6 +6,7 @@ const tts = {
   isSupported: false,
   voices: [],
   currentLine: 0,
+  defaultLang: 'en-IN',
   config: {
     voice: null,
     voiceURI: 'native',
@@ -47,10 +48,13 @@ const tts = {
       lineWrapping: true,
       mode: {name: "javascript", globalVars: true},
     });
-    this.editor.setValue("Welcome to Text to Speech, please write your content and press play button!");
-
+    if ($('#story-content').val() !== '') {
+      this.editor.setValue($('#story-content').val());
+    } else {
+      this.editor.setValue("Welcome to Text to Speech, please write your content and press play button!");
+    }
   },
-  _markLine: function (lineNo = 0)  {
+  _markLine: function (lineNo)  {
     $('.CodeMirror-line span > span').removeClass('alert alert-info p-0');
     this.editor.markText(
       { line: lineNo, ch: 0 },
@@ -62,7 +66,13 @@ const tts = {
     this.voices = await this.getVoiceList();
     let voiceHtml = '';
     this.voices.forEach((voice) => {
-      voiceHtml += `<a class="dropdown-item" value="${voice.voiceURI}" >${voice.name} (${voice.lang})</a>`
+      if (voice.lang === this.defaultLang) {
+        $('.selected-lang').text(`${voice.name} (${voice.lang})`);
+        this.config.voice = voice;
+        this.config.lang = voice.lang;
+        this.config.voiceURI = voice.voiceURI;
+      }
+      voiceHtml += `<a class="dropdown-item" value="${voice.voiceURI}"  >${voice.name} (${voice.lang})</a>`
     });
     if (voiceHtml !== '') {
       $('.voices').html(voiceHtml);
@@ -98,7 +108,6 @@ const tts = {
     console.log(error);
   },
   play: function () {
-    console.log(this.currentLine + '---' + this.totalLines());
     if (this.currentLine > this.totalLines()) {
       this.reset();
       return false;
@@ -106,7 +115,6 @@ const tts = {
     for (const [key, value] of Object.entries(this.config)) {
       this._speechSynthesis[key] = value;
     }
-    // console.log(this.editor.getValue());
     let currentLineText = this.editor.getLine(this.currentLine);
     // if line is empty then skip the line
     if ($.trim(currentLineText).length === 0 ) {
@@ -116,7 +124,6 @@ const tts = {
     }
     this._speechSynthesis.text = this.editor.getLine(this.currentLine);
     window.setTimeout(() => {
-      console.log(window.speechSynthesis);
       if (window.speechSynthesis.paused) {
         window.speechSynthesis.resume(this._speechSynthesis);
       } else {
@@ -130,7 +137,7 @@ const tts = {
     }
     window.setTimeout(function() {
       window.speechSynthesis.pause();
-    }, 200)
+    }, 200);
   },
   reverse: function () {
     this.currentLine = this.currentLine > 0
@@ -143,6 +150,7 @@ const tts = {
     this.play();
   },
   reset: function () {
+    this.pause();
     window.setTimeout(() => {
       window.speechSynthesis.cancel();
       this.currentLine = 0;
@@ -160,6 +168,7 @@ $(document).ready(function(e) {
     if ($(this).attr('value')) {
       const voiceURI = $(this).attr('value');
       const voice = tts.voices.find(voice =>  voice.voiceURI === voiceURI);
+      console.log(voice);
       tts.config.voice = voice;
       tts.config.lang = voice.lang;
       tts.config.voiceURI = voice.voiceURI;

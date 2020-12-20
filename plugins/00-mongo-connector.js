@@ -1,7 +1,7 @@
 'use strict'
 
 const fp = require('fastify-plugin')
-const MODELS = require('../models/index.js/index.js');
+const MODELS = require('../models/index.js');
 
 // the use of fastify-plugin is required to be able
 // to export the decorators to the outer scope
