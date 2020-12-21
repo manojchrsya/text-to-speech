@@ -1,4 +1,4 @@
-## Implementing similar to Trie algo to search json object
+## Project based on Speech Synthesis of browser
 --------------------------------------------------------------
 ### Installation
 

@@ -35,15 +35,26 @@
       <div class="playgroud">
         <div class="alert alert-danger d-none instructions" role="alert"></div>
         <div class="languages">
-          <div class="language btn-group">
-            <button class="btn btn-primary dropdown-toggle selected-lang" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Choose Languages
-            </button>
-            <div class="dropdown-menu voices"></div>
+          <div class="row text-center">
+            <div class="col-md-6">
+              <div class="language btn-group">
+                <button class="btn btn-primary dropdown-toggle selected-lang" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Choose Languages
+                </button>
+                <div class="dropdown-menu voices"></div>
+              </div>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#searchContent">
+                Search &nbsp;&nbsp;<i class="fas fa-search" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="col-md-3 offset-md-3">
+              <form action="/upload" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                  <input type="file" name="file" onchange="this.form.submit()" class="form-control-file btn btn-primary">
+                </div>
+              </form>
+            </div>
           </div>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#searchContent">
-            Search &nbsp;&nbsp;<i class="fas fa-search" aria-hidden="true"></i>
-          </button>
         </div>
         <div class="box-content mt-3">
           <div class="card">

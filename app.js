@@ -2,7 +2,7 @@
 
 const path = require('path')
 const AutoLoad = require('fastify-autoload')
-
+const multer = require('fastify-multer');
 
 module.exports = async function (fastify, opts) {
   // Place here your custom code!
@@ -14,6 +14,7 @@ module.exports = async function (fastify, opts) {
     .register(require('point-of-view'), { engine: { ejs: require('ejs') }, root: path.join(__dirname, 'views') })
     .register(require('fastify-static'), { root: path.join(__dirname, 'public'), prefix: '/' })
     .register(require('fastify-formbody'))
+    .register(multer.contentParser)
 
   // Do not touch the following lines
 
