@@ -9,7 +9,7 @@
   "scripts": {
     "test": "tap test/**/*.test.js",
     "start": "node server.js",
-    "dev": "fastify start -w -l info -P --ignore-watch='node_modules public csv-data' app.js"
+    "dev": "fastify start -w -l info -P --ignore-watch='node_modules public csv-data eng.traineddata' app.js"
   },
   "keywords": [],
   "author": "",
@@ -28,7 +28,8 @@
     "fastify-static": "^3.3.0",
     "fs-extra": "^9.0.1",
     "multer": "^1.4.2",
-    "point-of-view": "^4.6.0"
+    "point-of-view": "^4.6.0",
+    "tesseract.js": "^2.1.4"
   },
   "devDependencies": {
     "eslint": "^7.16.0",
