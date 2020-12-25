@@ -1,9 +1,31 @@
-const multer = require('fastify-multer');
-const upload = multer({ dest: 'public/', filename: 'image' });
+const multer = require('fastify-multer')
+const fs = require('fs-extra');
 
 const COUNT_PER_PAGE = 9
 
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const path = `public/uploads`;
+    fs.mkdirsSync(path);
+    cb(null, path);
+  },
+  filename: (req, file, cb) => {
+    const extension = file.originalname.split('.').pop();
+    // eslint-disable-next-line no-underscore-dangle
+    cb(null, `${Date.now()}.${extension}`);
+  },
+});
+const upload = multer({ storage, fileFilter: function (req, file, callback) {
+  // accept image only
+  if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+    return callback(new Error('Only image files are allowed!'), false);
+  }
+  callback(null, file);
+}});
+
+
 module.exports = async function (fastify, opts) {
+
   fastify.get('/', async function (request, reply) {
     const promise = [];
     const page = {};
@@ -22,7 +44,7 @@ module.exports = async function (fastify, opts) {
   });
 
   fastify.post('/upload', { preHandler: upload.single('file') }, async function (request, reply) {
-    console.log('inside uploaddd ');
     return reply.redirect('/');
   });
+
 }

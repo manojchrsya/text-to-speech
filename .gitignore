@@ -21,6 +21,8 @@ npm-debug.log
 data
 csv-data/*
 !csv-data/README.md
+public/uploads/*
+!public/uploads/README.md
 dist
 .yarn-cache.tgz
 .history

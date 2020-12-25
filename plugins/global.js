@@ -11,5 +11,11 @@ module.exports = fp(async (fastify, opts) => {
   for (const [key, value] of Object.entries(mongoose.instance.models)) {
     global[key] = value;
   }
+  fastify.addHook('preHandler', function (req, reply, next) {
+    reply.locals = reply.locals || {};
+    reply.locals.url = process.env.BASE_URL;
+    reply.locals.errors = [];
+    next();
+  })
   return Promise.resolve();
 })
