@@ -13,6 +13,8 @@ module.exports = async function (fastify, opts) {
   fastify
     .register(require('point-of-view'), { engine: { ejs: require('ejs') }, root: path.join(__dirname, 'views') })
     .register(require('fastify-static'), { root: path.join(__dirname, 'public') })
+    .register(require('fastify-cors'), {exposedHeaders: 'Content-Disposition'})
+    .register(require('fastify-compress'), { threshold: 0 })
     .register(require('fastify-formbody'))
     .register(multer.contentParser)
   // Do not touch the following lines

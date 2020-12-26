@@ -11,6 +11,8 @@ module.exports = fp(async (fastify, opts) => {
   for (const [key, value] of Object.entries(mongoose.instance.models)) {
     global[key] = value;
   }
+
+  // adding pre handler for locals
   fastify.addHook('preHandler', function (req, reply, next) {
     reply.locals = reply.locals || {};
     reply.locals.url = process.env.BASE_URL;

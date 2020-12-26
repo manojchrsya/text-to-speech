@@ -1,6 +1,5 @@
-
-
-const COUNT_PER_PAGE = 9
+const path = require('path');
+const fs = require('fs');
 const Tesseract = require('../lib/Tesseract');
 
 const tesseract = new Tesseract();
@@ -9,13 +8,7 @@ class IndexController {
 
   async home (request, reply) {
     const promise = [];
-    const page = {};
-    page.pageNo = (request.query && request.query.pageNo) || 1;
-    const total = await Story.countDocuments();
-    const totalPage = Math.ceil(total / COUNT_PER_PAGE);
-    page.total = totalPage;
-    const skip = (COUNT_PER_PAGE * (parseInt(page.pageNo) - 1));
-    const limit = COUNT_PER_PAGE;
+    const { skip, limit, page } = await this.pagination(request, Story);
     promise.push(Story.find().skip(skip).limit(limit));
     if (request.query && request.query.storyId) {
       promise.push(Story.findById(request.query.storyId));
@@ -28,9 +21,20 @@ class IndexController {
     // load tesseract
     await tesseract.init();
     const { data: { text } } = await tesseract.recognize(request.file);
-    return reply.redirect('/');
+    // remove upload file after extracting text
+    await tesseract.remove();
+    const { skip, limit, page } = await this.pagination(request, Story);
+    const stories = await Story.find().skip(skip).limit(limit);
+    const selected = { title: '', content: text };
+    return reply.view('image-to-speech.ejs', { stories, selected, page });
   }
 
+  download (request, reply) {
+    reply.header('Content-disposition', 'attachment; filename=sample.png');
+    const filePath = path.join(__dirname, '../' ,'public/uploads/sample.png');
+    const content = fs.readFileSync(filePath);
+    return reply.send(content);
+  }
 }
 
 module.exports = IndexController

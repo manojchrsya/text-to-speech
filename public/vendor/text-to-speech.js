@@ -28,7 +28,7 @@ const tts = {
   },
   _showInstructions: function () {
     if (this.isSupported) {
-      $('.instructions').removeClass('alert-danger d-none').addClass('alert-warning').html(`<strong>Awsome!!</strong> Your browser supports TTS feature. Please Upload Text, PDF, Image or write your
+      $('.instructions').removeClass('alert-danger d-none').addClass('alert-warning').html(`<strong>Awsome!!</strong> Your browser supports TTS feature. Please Upload your image file to read text or write your
        own content to listen.`)
     } else {
       $('.instructions').removeClass('alert-warning d-none').addClass('alert-danger').html(`<strong>Warning:</strong> Your browser does not support Speech Synthesis. Please use latest
