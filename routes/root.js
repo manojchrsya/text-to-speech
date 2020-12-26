@@ -8,7 +8,10 @@ module.exports = async function (fastify, opts) {
   fastify.decorateRequest('tesseractText', '');
 
   fastify.get('/', opts, indexController.home);
+
   fastify.post('/upload', { preHandler: uploadInstance.upload.single('file') }, indexController.upload);
+  fastify.get('/upload', indexController.redirect);
 
   fastify.get('/download', indexController.download);
+
 }

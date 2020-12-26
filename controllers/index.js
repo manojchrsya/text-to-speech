@@ -22,7 +22,7 @@ class IndexController {
     await tesseract.init();
     const { data: { text } } = await tesseract.recognize(request.file);
     // remove upload file after extracting text
-    await tesseract.remove();
+    await tesseract.remove(request.file);
     const { skip, limit, page } = await this.pagination(request, Story);
     const stories = await Story.find().skip(skip).limit(limit);
     const selected = { title: '', content: text };
@@ -34,6 +34,10 @@ class IndexController {
     const filePath = path.join(__dirname, '../' ,'public/uploads/sample.png');
     const content = fs.readFileSync(filePath);
     return reply.send(content);
+  }
+
+  redirect(request, reply) {
+    return reply.redirect('/');
   }
 }
 
