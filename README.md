@@ -1,7 +1,7 @@
 ## Project based on Speech Synthesis of browser
 --------------------------------------------------------------
 
-Text to Speech contains 2 different modules to completed.
+Text to Speech contains 3 different major modules.
 - Crawler - to get data from different web pages to store contents for examples
 - Tesseract - to parse image and get content from it
 - SpeechSynthesis - to listen text in audio form
