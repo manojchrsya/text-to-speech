@@ -6,7 +6,6 @@ const MODELS = require('../models/index.js');
 
 // eslint-disable-next-line no-unused-vars
 module.exports = fp(async (fastify, opts) => {
-  // eslint-disable-next-line global-require
   fastify.register(require('fastify-mongoose-driver').plugin, {
     uri: process.env.MONGO_URI,
     settings: {

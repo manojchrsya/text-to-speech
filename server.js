@@ -6,7 +6,7 @@ const FastifyConsole = require('./lib/Console');
 const fastifyconsole = new FastifyConsole();
 
 // Instantiate Fastify with some config
-const app = Fastify({ logger: true, pluginTimeout: 1000 });
+const app = Fastify({ logger: true, pluginTimeout: 3000 });
 const App = require('./app');
 
 // Register your application as a normal plugin.

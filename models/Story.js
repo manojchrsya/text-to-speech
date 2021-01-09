@@ -1,3 +1,15 @@
+class StoryClass {
+  // `getFullTitle()` becomes a document method
+  getFullTitle() {
+    return this.title;
+  }
+
+  // `findByCategory()` becomes a static
+  static findByCategory(category) {
+    return this.find({ category });
+  }
+}
+
 module.exports = {
   name: 'Story',
   alias: 'Story',
@@ -23,4 +35,5 @@ module.exports = {
       required: false,
     },
   },
+  class: StoryClass,
 };
