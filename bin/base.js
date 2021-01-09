@@ -11,7 +11,8 @@ class Base {
     this.app = fastify.register(fp(app), {});
   }
 
-  static getFileContent(filePath) {
+  // eslint-disable-next-line class-methods-use-this
+  getFileContent(filePath) {
     const file = path.join(__dirname, filePath);
     if (!fs.existsSync(file)) {
       throw new Error('File not exist in path');
@@ -27,7 +28,8 @@ class Base {
     });
   }
 
-  static exit() {
+  // eslint-disable-next-line class-methods-use-this
+  exit() {
     process.exit(-1);
   }
 }
