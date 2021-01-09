@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 const request = require('request');
 const cheerio = require('cheerio');
 const fs = require('fs');
@@ -6,7 +7,7 @@ const Promise = require('bluebird');
 const FILE_PATH = './csv-data/story.json';
 // 'http://www.english-for-students.com/Hindi-Short-Stories.html',
 const URLS = [
-  'https://hindistory.net/story/5'
+  'https://hindistory.net/story/5',
 ];
 
 class Crawler {
@@ -31,15 +32,19 @@ class Crawler {
       return true;
     });
     this.dump(data);
+    // eslint-disable-next-line no-console
     console.log('-----parsing data complete--------');
     process.exit();
   }
 
+  // eslint-disable-next-line class-methods-use-this
   async parseUrl(url) {
+    // eslint-disable-next-line no-console
     console.log(`crawling ${url}`);
     return new Promise((resolve) => {
-      request(url, function (error, response) {
+      request(url, (error, response) => {
         if (error) {
+          // eslint-disable-next-line no-console
           console.error(error);
           return false;
         }
@@ -48,6 +53,7 @@ class Crawler {
     });
   }
 
+  // eslint-disable-next-line class-methods-use-this
   async getPrimaryLinks() {
     const links = [];
     // await Promise.mapSeries(this.urls, async (url) => {
@@ -59,17 +65,19 @@ class Crawler {
     //     });
     //   })
     // });
-    for (let i = 5; i < 50; i++) {
-      links.push(`https://hindistory.net/story/${i}`)
+    for (let i = 5; i < 50; i = +1) {
+      links.push(`https://hindistory.net/story/${i}`);
     }
     return links;
   }
 
+  // eslint-disable-next-line consistent-return
   async dump(data) {
     try {
       fs.writeFileSync(this.filePath, JSON.stringify(data));
       return true;
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error(error);
     }
   }

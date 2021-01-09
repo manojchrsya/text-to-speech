@@ -1,13 +1,13 @@
-'use strict'
-
-const fp = require('fastify-plugin')
+const fp = require('fastify-plugin');
 const MODELS = require('../models/index.js');
 
 // the use of fastify-plugin is required to be able
 // to export the decorators to the outer scope
 
+// eslint-disable-next-line no-unused-vars
 module.exports = fp(async (fastify, opts) => {
-  fastify.register(require("fastify-mongoose-driver").plugin, {
+  // eslint-disable-next-line global-require
+  fastify.register(require('fastify-mongoose-driver').plugin, {
     uri: process.env.MONGO_URI,
     settings: {
       useUnifiedTopology: true,
@@ -15,9 +15,9 @@ module.exports = fp(async (fastify, opts) => {
       config: {
         autoIndex: true,
       },
-      dbName: 'text-to-speech'
+      dbName: 'text-to-speech',
     },
     models: MODELS,
-    useNameAndAlias: true
+    useNameAndAlias: true,
   });
 });

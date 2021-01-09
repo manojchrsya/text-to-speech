@@ -1,6 +1,6 @@
 module.exports = {
-  name: "Story",
-  alias: "Story",
+  name: 'Story',
+  alias: 'Story',
   schema: {
     title: {
       type: String,
@@ -21,6 +21,6 @@ module.exports = {
     lang: {
       type: Array,
       required: false,
-    }
+    },
   },
 };

@@ -1,8 +1,7 @@
-
-const Base = require('./base');
-const FILE_PATH = '../csv-data/story.json';
 const Promise = require('bluebird');
+const Base = require('./base');
 
+const FILE_PATH = '../csv-data/story.json';
 class StoryMaster extends Base {
   constructor() {
     super();
@@ -11,7 +10,7 @@ class StoryMaster extends Base {
 
   async init() {
     await this.app.ready();
-    const data = await this.getFileContent(this.filePath)
+    const data = await this.getFileContent(this.filePath);
     const stories = JSON.parse(data);
     // itrate and save in db
     await Promise.mapSeries(stories, async (story) => {
@@ -20,7 +19,6 @@ class StoryMaster extends Base {
       }
       return true;
     });
-    console.log('uploading data completed')
     this.exit();
   }
 }

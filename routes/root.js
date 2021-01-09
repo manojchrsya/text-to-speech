@@ -1,7 +1,7 @@
-
 const IndexController = require('../controllers');
 const Upload = require('../lib/Upload');
 
+// eslint-disable-next-line func-names
 module.exports = async function (fastify, opts) {
   const indexController = new IndexController();
   const uploadInstance = new Upload();
@@ -13,5 +13,4 @@ module.exports = async function (fastify, opts) {
   fastify.get('/upload', indexController.redirect);
 
   fastify.get('/download', indexController.download);
-
-}
+};

@@ -1,16 +1,17 @@
 // Require the framework
 const Fastify = require('fastify');
+const fp = require('fastify-plugin');
+const path = require('path');
 const fs = require('fs');
-const path = require('path')
-require('dotenv').config();
+const app = require('../app');
 
 class Base {
-  constructor () {
-    this.app = new Fastify({ logger: true, pluginTimeout: 10000 });
-    this.app.register(require('../plugins/00-mongo-connector.js'));
+  constructor() {
+    const fastify = new Fastify({ logger: true, pluginTimeout: 10000 });
+    this.app = fastify.register(fp(app), {});
   }
 
-  getFileContent(filePath) {
+  static getFileContent(filePath) {
     const file = path.join(__dirname, filePath);
     if (!fs.existsSync(file)) {
       throw new Error('File not exist in path');
@@ -18,18 +19,17 @@ class Base {
     return new Promise((resolve) => {
       let data = '';
       const stream = fs.createReadStream(file);
-      stream.on('data', function(chunk) {
+      stream.on('data', (chunk) => {
         data += chunk;
-      }).on('end', function() {
+      }).on('end', () => {
         resolve(data);
       });
     });
   }
 
-  exit () {
+  static exit() {
     process.exit(-1);
   }
-
 }
 
 module.exports = Base;

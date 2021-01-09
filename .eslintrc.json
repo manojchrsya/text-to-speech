@@ -1,0 +1,18 @@
+{
+    "env": {
+      "commonjs": true,
+      "es6": true
+    },
+    "extends": [
+      "airbnb-base"
+    ],
+    "globals": {
+      "Story": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 2018
+    },
+    "rules": {
+      "no-console": "error"
+    }
+}

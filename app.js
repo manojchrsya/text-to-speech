@@ -1,9 +1,9 @@
-'use strict'
+/* eslint-disable global-require */
+const path = require('path');
+const AutoLoad = require('fastify-autoload');
+const multer = require('fastify-multer');
 
-const path = require('path')
-const AutoLoad = require('fastify-autoload')
-const multer = require('fastify-multer')
-
+// eslint-disable-next-line func-names
 module.exports = async function (fastify, opts) {
   // Place here your custom code!
   // Read the .env file.
@@ -13,10 +13,10 @@ module.exports = async function (fastify, opts) {
   fastify
     .register(require('point-of-view'), { engine: { ejs: require('ejs') }, root: path.join(__dirname, 'views') })
     .register(require('fastify-static'), { root: path.join(__dirname, 'public') })
-    .register(require('fastify-cors'), {exposedHeaders: 'Content-Disposition'})
+    .register(require('fastify-cors'), { exposedHeaders: 'Content-Disposition' })
     .register(require('fastify-compress'), { threshold: 0 })
     .register(require('fastify-formbody'))
-    .register(multer.contentParser)
+    .register(multer.contentParser);
   // Do not touch the following lines
 
   // This loads all plugins defined in plugins
@@ -24,14 +24,13 @@ module.exports = async function (fastify, opts) {
   // through your application
   fastify.register(AutoLoad, {
     dir: path.join(__dirname, 'plugins'),
-    options: Object.assign({}, opts)
-  })
+    options: { ...opts },
+  });
 
   // This loads all plugins defined in routes
   // define your routes in one of these
   fastify.register(AutoLoad, {
     dir: path.join(__dirname, 'routes'),
-    options: Object.assign({}, opts)
-  })
-
-}
+    options: { ...opts },
+  });
+};

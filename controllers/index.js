@@ -5,8 +5,7 @@ const Tesseract = require('../lib/Tesseract');
 const tesseract = new Tesseract();
 
 class IndexController {
-
-  async home (request, reply) {
+  async home(request, reply) {
     const promise = [];
     const { skip, limit, page } = await this.pagination(request, Story);
     promise.push(Story.find().skip(skip).limit(limit));
@@ -17,7 +16,7 @@ class IndexController {
     return reply.view('image-to-speech.ejs', { stories, selected, page });
   }
 
-  async upload (request, reply) {
+  async upload(request, reply) {
     // load tesseract
     await tesseract.init();
     const { data: { text } } = await tesseract.recognize(request.file);
@@ -29,16 +28,18 @@ class IndexController {
     return reply.view('image-to-speech.ejs', { stories, selected, page });
   }
 
-  download (request, reply) {
+  // eslint-disable-next-line class-methods-use-this
+  download(_request, reply) {
     reply.header('Content-disposition', 'attachment; filename=sample.png');
-    const filePath = path.join(__dirname, '../' ,'public/uploads/sample.png');
+    const filePath = path.join(__dirname, '../', 'public/uploads/sample.png');
     const content = fs.readFileSync(filePath);
     return reply.send(content);
   }
 
-  redirect(request, reply) {
+  // eslint-disable-next-line class-methods-use-this
+  redirect(_request, reply) {
     return reply.redirect('/');
   }
 }
 
-module.exports = IndexController
+module.exports = IndexController;
