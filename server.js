@@ -1,9 +1,9 @@
 // Require the framework
 const Fastify = require('fastify');
 const fp = require('fastify-plugin');
-const FConsole = require('./lib/Console');
+// const FConsole = require('./lib/Console');
+const FastifyConsole = require('fastify-console');
 
-const FastifyConsole = new FConsole();
 // Instantiate Fastify with some config
 const app = Fastify({ logger: true, pluginTimeout: 4000 });
 const App = require('./app');
