@@ -1,26 +1,26 @@
 // Require the framework
 const Fastify = require('fastify');
 const fp = require('fastify-plugin');
-const FastifyConsole = require('./lib/Console');
+const FConsole = require('./lib/Console');
 
-const fastifyconsole = new FastifyConsole();
-
+const FastifyConsole = new FConsole();
 // Instantiate Fastify with some config
-const app = Fastify({ logger: true, pluginTimeout: 3000 });
+const app = Fastify({ logger: true, pluginTimeout: 4000 });
 const App = require('./app');
 
 // Register your application as a normal plugin.
 app.register(fp(App), {});
 
-if (fastifyconsole.active()) {
+if (FastifyConsole.active()) {
   app.ready((error) => {
     if (error) {
       // eslint-disable-next-line no-console
       console.error(error);
       return false;
     }
-    return fastifyconsole.start(app, {
+    return FastifyConsole.start(app, {
       prompt: 'fastify > ',
+      historyPath: '.data/history.log',
     });
   });
 } else if (require.main === module) {

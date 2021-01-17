@@ -35,3 +35,4 @@ ecosystem.config.js
 fcm.config.js
 nodemon.json
 eng.traineddata
+.data/*

@@ -9,6 +9,7 @@
   "scripts": {
     "test": "tap test/**/*.test.js",
     "start": "node server.js",
+    "console": "node server.js --console",
     "dev": "fastify start -w -l info -P --ignore-watch='node_modules public csv-data eng.traineddata' app.js",
     "lint-fix": "eslint --fix ."
   },
@@ -24,6 +25,7 @@
     "fastify-autoload": "^3.0.2",
     "fastify-cli": "^2.0.2",
     "fastify-compress": "^3.4.1",
+    "fastify-console": "^1.0.0",
     "fastify-cors": "^5.1.0",
     "fastify-formbody": "^5.0.0",
     "fastify-mongoose-driver": "^3.2.0",
