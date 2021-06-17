@@ -35,7 +35,7 @@ class CrawlPartDetail extends Crawler {
     data.meta = meta;
     await data.save();
     await new Promise((resolve) => {
-      setTimeout(() => resolve(), 2000);
+      setTimeout(() => resolve(), 1000);
     });
     return true;
   }
