@@ -4,14 +4,17 @@ const cheerio = require('cheerio');
 const fs = require('fs');
 const Promise = require('bluebird');
 
+const Base = require('./base');
+
 const FILE_PATH = './csv-data/story.json';
 // 'http://www.english-for-students.com/Hindi-Short-Stories.html',
 const URLS = [
   'https://hindistory.net/story/5',
 ];
 
-class Crawler {
+class Crawler extends Base {
   constructor() {
+    super();
     this.urls = URLS;
     this.filePath = FILE_PATH;
   }
@@ -83,5 +86,7 @@ class Crawler {
   }
 }
 
-const crawler = new Crawler();
-crawler.crawl();
+// const crawler = new Crawler();
+// crawler.crawl();
+
+module.exports = Crawler;

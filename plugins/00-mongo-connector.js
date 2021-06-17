@@ -6,7 +6,7 @@ const MODELS = require('../models/index.js');
 
 // eslint-disable-next-line no-unused-vars
 module.exports = fp(async (fastify, opts) => {
-  fastify.register(require('fastify-mongoose-driver').plugin, {
+  const config = {
     uri: process.env.MONGO_URI,
     settings: {
       useUnifiedTopology: true,
@@ -18,5 +18,6 @@ module.exports = fp(async (fastify, opts) => {
     },
     models: MODELS,
     useNameAndAlias: true,
-  });
+  };
+  fastify.register(require('fastify-mongoose-driver').plugin, config);
 });
